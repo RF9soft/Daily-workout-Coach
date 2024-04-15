@@ -11,12 +11,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
 import 'package:startapp_sdk/startapp.dart';
 
-import '../../common/AppColors.dart';
+import '../../common/app_colors.dart';
 import '../../common/strings.dart';
-import '../../controller/BodyPartController.dart';
+import '../../controller/body_part_controller.dart';
 import '../../network/ApiHeaders.dart';
-import '../../widget/ShimmerLoadingEffect.dart';
-import 'ExerciseDetailsScreen.dart';
+import '../../widget/shimmer_loading_effect.dart';
+import 'exercise_details_screen.dart';
 
 class HomeDetailsScreen extends StatefulWidget {
   const HomeDetailsScreen({super.key});

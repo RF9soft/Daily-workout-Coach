@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:kettlebell/screen/HomeScreen.dart';
-import 'package:kettlebell/screen/SplashScreen.dart';
-import 'package:kettlebell/screen/exercisedb/ExerciseScreen.dart';
+import 'package:kettlebell/screen/home_screens.dart';
+import 'package:kettlebell/screen/splash_screen.dart';
+import 'package:kettlebell/screen/exercisedb/exercise_screen.dart';
 import 'package:provider/provider.dart';
-import 'common/AppColors.dart';
+import 'common/app_colors.dart';
 import 'common/AppRoutes.dart';
 
 void main() async {

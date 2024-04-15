@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../common/AppRoutes.dart';
-import '../../common/AppColors.dart';
-import '../../common/AppImages.dart';
+import '../../common/app_colors.dart';
+import '../../common/app_images.dart';
 import '../../common/style.dart'; // Import the file where AppText style is defined
 
 class SplashScreen extends StatelessWidget {

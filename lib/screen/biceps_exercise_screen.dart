@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:kettlebell/network/ApiHeaders.dart';
 import 'dart:convert';
 
-import '../common/AppColors.dart';
+import '../common/app_colors.dart';
 import '../common/strings.dart';
 import '../network/ApiHeaders2.dart';
 

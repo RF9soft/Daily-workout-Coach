@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../common/AppColors.dart';
+import '../../common/app_colors.dart';
 import '../../common/strings.dart';
 import '../../network/ApiService.dart';
-import 'ExerciseDetailsScreen.dart';
+import 'exercise_details_screen.dart';
 
 class ExerciseScreen extends StatefulWidget {
   const ExerciseScreen({super.key});

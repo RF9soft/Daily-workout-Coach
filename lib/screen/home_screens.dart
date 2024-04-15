@@ -5,13 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:kettlebell/common/AppColors.dart';
-import 'package:kettlebell/common/AppImages.dart';
-import 'package:kettlebell/screen/exercisedb/HomeExerciseDetailsScreen.dart';
+import 'package:kettlebell/common/app_colors.dart';
+import 'package:kettlebell/common/app_images.dart';
+import 'package:kettlebell/screen/exercisedb/home_exercise_details_screen.dart';
+import 'package:kettlebell/screen/women_workout_widget.dart';
 
 import '../common/strings.dart';
-import '../controller/BodyPartController.dart';
-import '../widget/AppDrawer.dart';
+import '../controller/body_part_controller.dart';
+import '../widget/app_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -76,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       backgroundColor: colorBg,
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         backgroundColor: colorAppBar,
         title: const Text(
           'Daily Workout Coach',
@@ -123,6 +125,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               Gap(16.h),
+              const Text(
+                'Female Workout',
+                style: TextStyle(
+                  color: Colors.black,fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 8.0),
+              WomenWorkoutWidget(),
+              SizedBox(height: 8.0),
             ],
           ),
         ),

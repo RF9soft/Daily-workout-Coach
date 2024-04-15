@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:startapp_sdk/startapp.dart';
 
-import '../../common/AppColors.dart';
+import '../../common/app_colors.dart';
 
 class ExerciseDetailsScreen extends StatefulWidget {
   final String name;
