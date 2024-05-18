@@ -7,7 +7,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kettlebell/screen/home_screens.dart';
 import 'package:kettlebell/screen/splash_screen.dart';
 import 'package:kettlebell/screen/exercisedb/exercise_screen.dart';
-import 'package:provider/provider.dart';
 import 'common/app_colors.dart';
 import 'common/AppRoutes.dart';
 
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
         builder: (_, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'PowerPulse',
+            title: 'Daily Workout',
             initialRoute: AppRoutes.splash,
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: colorAppBar),

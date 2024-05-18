@@ -19,7 +19,7 @@ class AboutAppScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Version: 1.0.0',
+              'Version: 1.0.6',
               style: AppTextStyles.subheading,
             ),
             SizedBox(height: 16),

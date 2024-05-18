@@ -5,10 +5,12 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:kettlebell/common/app_images.dart';
 import 'package:kettlebell/screen/biceps_exercise_screen.dart';
+import 'package:kettlebell/screen/women/due_date_calculator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../common/app_colors.dart';
 import '../screen/about_screen.dart';
 import '../screen/exercisedb/exercise_screen.dart';
+import '../screen/women/pregnancy_weight_calculator.dart';
 
 
 class AppDrawer extends StatelessWidget {
@@ -31,7 +33,7 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           const Text(
-            'Version 1.4',
+            'Version 1.6',
             style: TextStyle(
               color: colorBlack,
             ),
@@ -75,16 +77,12 @@ class AppDrawer extends StatelessWidget {
               color: colorPrimaryDark,
             ),
             title: const Text(
-              'ASK AI',
+              'Pregnancy Weight Gain',
               style: TextStyle(color: colorBlack),
             ),
             onTap: () async {
-              const url = 'https://play.google.com/store/apps/details?id=com.mentor.virtuai&pcampaignid=web_share';
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                throw 'Could not launch $url';
-              }
+              Get.to(() =>   PregnancyWeightCalculator());
+
             },
           ),
           ListTile(
@@ -95,16 +93,12 @@ class AppDrawer extends StatelessWidget {
               color: colorPrimaryDark,
             ),
             title: const Text(
-              'Life Mentor',
+              'Due Date Calculator',
               style: TextStyle(color: colorBlack),
             ),
             onTap: () async {
-              const url = 'https://play.google.com/store/apps/details?id=com.life.mentor&pcampaignid=web_share';
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                throw 'Could not launch $url';
-              }
+              Get.to(() =>   DueDateCalculator());
+
             },
           ),
           ListTile(

@@ -35,7 +35,7 @@
             android:value="ca-app-pub-3254074284549678~8591462966"/>
         <meta-data
             android:name="com.startapp.sdk.APPLICATION_ID"
-            android:value="201848307" />
+            android:value="204932086" />
 
     </application>
 </manifest>
