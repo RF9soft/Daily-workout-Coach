@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -8,10 +10,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kettlebell/common/app_colors.dart';
 import 'package:kettlebell/common/app_images.dart';
 import 'package:kettlebell/screen/exercisedb/home_exercise_details_screen.dart';
-import 'package:kettlebell/screen/women_workout_widget.dart';
+import 'package:kettlebell/screen/nutrition/nutrition_screen.dart';
 
+import '../common/AppRoutes.dart';
 import '../common/strings.dart';
 import '../controller/body_part_controller.dart';
+import '../widget/banner_carousel.dart';
 import '../widget/app_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -94,6 +98,14 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.menu,
               color: Colors.white,
             )),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.star, color: Colors.yellow),
+            onPressed: () {
+              Get.toNamed(AppRoutes.premium);
+            },
+          ),
+        ],
         elevation: 0,
         centerTitle: true,
       ),
@@ -103,6 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Gap(16.h),
+              BannerCarousel(), // Add the banner carousel here
               Gap(16.h),
               GridView.count(
                 shrinkWrap: true,
@@ -125,16 +139,40 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               Gap(16.h),
-              const Text(
-                'Female Workout',
-                style: TextStyle(
-                  color: Colors.black,fontSize: 18,
-                  fontWeight: FontWeight.w500,
+              GestureDetector(
+                onTap: () {
+                  // Navigate to the desired screen upon tap
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NutritionScreen()),
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 80.h,
+                  margin: EdgeInsets.symmetric(horizontal: 5.0.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0.r),
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/pattern.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Food Nutrition',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1,
+                        fontFamily: 'Roboto',
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 8.0),
-              WomenWorkoutWidget(),
-              SizedBox(height: 8.0),
+              Gap(16.h),
             ],
           ),
         ),

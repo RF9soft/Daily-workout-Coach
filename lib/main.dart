@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kettlebell/screen/home_screens.dart';
+import 'package:kettlebell/screen/nutrition/news_page_screen.dart';
+import 'package:kettlebell/screen/nutrition/nutrition_screen.dart';
 import 'package:kettlebell/screen/splash_screen.dart';
 import 'package:kettlebell/screen/exercisedb/exercise_screen.dart';
 import 'common/app_colors.dart';
 import 'common/AppRoutes.dart';
+import 'controller/news_controller.dart';  // Import the NewsController
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -29,6 +31,9 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         // Use builder only if you need to use library outside ScreenUtilInit context
         builder: (_, child) {
+          // Initialize NewsController
+          Get.put(NewsController());
+
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Daily Workout',
@@ -49,6 +54,14 @@ class MyApp extends StatelessWidget {
               GetPage(
                 name: AppRoutes.exercise,
                 page: () => const ExerciseScreen(),
+              ),
+              GetPage(
+                name: AppRoutes.news,
+                page: () => NewsPage(),  // Add a new route for the news screen
+              ),
+              GetPage(
+                name: AppRoutes.premium,
+                page: () => NutritionScreen(),  // Add a new route for the news screen
               ),
             ],
           );

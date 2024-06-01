@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:startapp_sdk/startapp.dart';
+
 
 import '../../common/app_colors.dart';
 
@@ -26,30 +26,15 @@ class ExerciseDetailsScreen extends StatefulWidget {
 class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
   String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
-  var startAppSdk = StartAppSdk();
 
-  StartAppInterstitialAd? interstitialAd;
 
   @override
   void initState() {
     super.initState();
 
-    // TODO make sure to comment out this line before release
-    startAppSdk.setTestAdsEnabled(true);
-    loadInterstitialAd();
+
   }
 
-  void loadInterstitialAd() {
-    startAppSdk.loadInterstitialAd().then((interstitialAd) {
-      setState(() {
-        this.interstitialAd = interstitialAd;
-      });
-    }).onError<StartAppException>((ex, stackTrace) {
-      debugPrint("Error loading Interstitial ad: ${ex.message}");
-    }).onError((error, stackTrace) {
-      debugPrint("Error loading Interstitial ad: $error");
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,23 +45,6 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            if (interstitialAd != null) {
-              interstitialAd!.show().then((shown) {
-                if (shown) {
-                  setState(() {
-                    // NOTE interstitial ad can be shown only once
-                    this.interstitialAd = null;
-
-                    // NOTE load again
-                    loadInterstitialAd();
-                  });
-                }
-
-                return null;
-              }).onError((error, stackTrace) {
-                debugPrint("Error showing Interstitial ad: $error");
-              });
-            }
             Get.back();
           },
           icon: const Icon(

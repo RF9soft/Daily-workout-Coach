@@ -9,7 +9,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../common/app_colors.dart';
 import '../../common/strings.dart';
-import '../../network/ApiService.dart';
+import '../../network/api_service.dart';
 import 'exercise_details_screen.dart';
 
 class ExerciseScreen extends StatefulWidget {

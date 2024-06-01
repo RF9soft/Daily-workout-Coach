@@ -6,4 +6,6 @@ class AppRoutes {
   static const String exercise = '/exercise';
   static const String Profile = '/profile';
   static const String Verify = '/verify';
+  static const String news = '/news';  // Add news route
+  static const String premium = '/premium';  // Add news route
 }

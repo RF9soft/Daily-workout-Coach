@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:kettlebell/common/app_images.dart';
 import 'package:kettlebell/screen/biceps_exercise_screen.dart';
+import 'package:kettlebell/screen/nutrition/news_page_screen.dart';
 import 'package:kettlebell/screen/women/due_date_calculator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../common/app_colors.dart';
@@ -69,6 +70,38 @@ class AppDrawer extends StatelessWidget {
               Get.to(() => const BicepsExerciseScreen());
             },
           ),
+          // ListTile(
+          //   leading: SvgPicture.asset(
+          //     info,
+          //     height: 16.h,
+          //     width: 16.w,
+          //     color: colorPrimaryDark,
+          //   ),
+          //   title: const Text(
+          //     'Pregnancy Weight Gain',
+          //     style: TextStyle(color: colorBlack),
+          //   ),
+          //   onTap: () async {
+          //     Get.to(() =>   PregnancyWeightCalculator());
+          //
+          //   },
+          // ),
+          // ListTile(
+          //   leading: SvgPicture.asset(
+          //     info,
+          //     height: 16.h,
+          //     width: 16.w,
+          //     color: colorPrimaryDark,
+          //   ),
+          //   title: const Text(
+          //     'Due Date Calculator',
+          //     style: TextStyle(color: colorBlack),
+          //   ),
+          //   onTap: () async {
+          //     Get.to(() =>   DueDateCalculator());
+          //
+          //   },
+          // ),
           ListTile(
             leading: SvgPicture.asset(
               info,
@@ -77,27 +110,11 @@ class AppDrawer extends StatelessWidget {
               color: colorPrimaryDark,
             ),
             title: const Text(
-              'Pregnancy Weight Gain',
+              'Meal plans',
               style: TextStyle(color: colorBlack),
             ),
             onTap: () async {
-              Get.to(() =>   PregnancyWeightCalculator());
-
-            },
-          ),
-          ListTile(
-            leading: SvgPicture.asset(
-              info,
-              height: 16.h,
-              width: 16.w,
-              color: colorPrimaryDark,
-            ),
-            title: const Text(
-              'Due Date Calculator',
-              style: TextStyle(color: colorBlack),
-            ),
-            onTap: () async {
-              Get.to(() =>   DueDateCalculator());
+              Get.to(() =>   NewsPage());
 
             },
           ),

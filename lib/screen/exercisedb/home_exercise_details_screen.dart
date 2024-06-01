@@ -9,8 +9,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
-import 'package:startapp_sdk/startapp.dart';
-
 import '../../common/app_colors.dart';
 import '../../common/strings.dart';
 import '../../controller/body_part_controller.dart';
@@ -34,9 +32,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
   InterstitialAd? interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  var startAppSdk = StartAppSdk();
-  StartAppBannerAd? bannerAd;
-  StartAppRewardedVideoAd? rewardedVideoAd;
+
 
   @override
   void initState() {
@@ -50,59 +46,9 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
       fetchExercises(); // Fetch if no cached data available
     }
     createInterstitial(); // Interstitial Ad
-    startAppSdk.setTestAdsEnabled(true);
-    startAppSdk.loadBannerAd(StartAppBannerType.BANNER).then((bannerAd) {
-      setState(() {
-        this.bannerAd = bannerAd;
-      });
-    }).onError<StartAppException>((ex, stackTrace) {
-      debugPrint("Error loading Banner ad: ${ex.message}");
-    }).onError((error, stackTrace) {
-      debugPrint("Error loading Banner ad: $error");
-    });
 
-    startAppSdk.setTestAdsEnabled(true);
-    loadRewardedVideoAd();
   }
 
-  void loadRewardedVideoAd() {
-    startAppSdk.loadRewardedVideoAd(
-      onAdNotDisplayed: () {
-        debugPrint('onAdNotDisplayed: rewarded video');
-
-        setState(() {
-          // NOTE rewarded video ad can be shown only once
-          this.rewardedVideoAd?.dispose();
-          this.rewardedVideoAd = null;
-        });
-      },
-      onAdHidden: () {
-        debugPrint('onAdHidden: rewarded video');
-
-        setState(() {
-          // NOTE rewarded video ad can be shown only once
-          this.rewardedVideoAd?.dispose();
-          this.rewardedVideoAd = null;
-        });
-      },
-      onVideoCompleted: () {
-        debugPrint(
-            'onVideoCompleted: rewarded video completed, user gain a reward');
-
-        setState(() {
-          // TODO give reward to user
-        });
-      },
-    ).then((rewardedVideoAd) {
-      setState(() {
-        this.rewardedVideoAd = rewardedVideoAd;
-      });
-    }).onError<StartAppException>((ex, stackTrace) {
-      debugPrint("Error loading Rewarded Video ad: ${ex.message}");
-    }).onError((error, stackTrace) {
-      debugPrint("Error loading Rewarded Video ad: $error");
-    });
-  }
 
   Future<void> fetchExercises() async {
     String selectedBodyPart = _bodyPartController.selectedBodyPart.value;
@@ -206,12 +152,6 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            if (rewardedVideoAd != null) {
-              rewardedVideoAd!.show().onError((error, stackTrace) {
-                debugPrint("Error showing Rewarded Video ad: $error");
-                return false;
-              });
-            }
             Get.back();
           },
           icon: const Icon(
@@ -310,8 +250,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
               },
             )
           : const ShimmerLoadingEffect(), // Display shimmer loading effect while data is being fetched
-      bottomNavigationBar:
-          bannerAd != null ? StartAppBanner(bannerAd!) : Container(),
+      
     );
   }
 }
