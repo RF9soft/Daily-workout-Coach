@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../screen/nearby/nearby_events_Screen.dart';
+import '../screen/workoutpersonalprogress/personal_workout_screen.dart';
 
 
 class BannerCarousel extends StatefulWidget {
@@ -34,7 +35,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NearbyEventsScreen(),
+                    builder: (context) => WorkoutPersonalScreen(),
                   ),
                 );
               },

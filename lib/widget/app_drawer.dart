@@ -4,14 +4,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:kettlebell/common/app_images.dart';
-import 'package:kettlebell/screen/biceps_exercise_screen.dart';
 import 'package:kettlebell/screen/nutrition/news_page_screen.dart';
-import 'package:kettlebell/screen/women/due_date_calculator.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:kettlebell/screen/subscription/subscription_screen.dart';
+import 'package:kettlebell/screen/workoutpersonalprogress/ProgressScreen.dart';
 import '../common/app_colors.dart';
-import '../screen/about_screen.dart';
+import '../screen/question/question_screen.dart';
+import '../screen/subscription/about_screen.dart';
 import '../screen/exercisedb/exercise_screen.dart';
-import '../screen/women/pregnancy_weight_calculator.dart';
+import 'package:share_plus/share_plus.dart';
+
+import '../screen/subscription/biceps_exercise_screen.dart';
 
 
 class AppDrawer extends StatelessWidget {
@@ -70,38 +72,7 @@ class AppDrawer extends StatelessWidget {
               Get.to(() => const BicepsExerciseScreen());
             },
           ),
-          // ListTile(
-          //   leading: SvgPicture.asset(
-          //     info,
-          //     height: 16.h,
-          //     width: 16.w,
-          //     color: colorPrimaryDark,
-          //   ),
-          //   title: const Text(
-          //     'Pregnancy Weight Gain',
-          //     style: TextStyle(color: colorBlack),
-          //   ),
-          //   onTap: () async {
-          //     Get.to(() =>   PregnancyWeightCalculator());
-          //
-          //   },
-          // ),
-          // ListTile(
-          //   leading: SvgPicture.asset(
-          //     info,
-          //     height: 16.h,
-          //     width: 16.w,
-          //     color: colorPrimaryDark,
-          //   ),
-          //   title: const Text(
-          //     'Due Date Calculator',
-          //     style: TextStyle(color: colorBlack),
-          //   ),
-          //   onTap: () async {
-          //     Get.to(() =>   DueDateCalculator());
-          //
-          //   },
-          // ),
+
           ListTile(
             leading: SvgPicture.asset(
               info,
@@ -110,11 +81,11 @@ class AppDrawer extends StatelessWidget {
               color: colorPrimaryDark,
             ),
             title: const Text(
-              'Meal plans',
+              'Workout Progress',
               style: TextStyle(color: colorBlack),
             ),
             onTap: () async {
-              Get.to(() =>   NewsPage());
+              Get.to(() =>   ProgressScreen());
 
             },
           ),
@@ -133,8 +104,43 @@ class AppDrawer extends StatelessWidget {
               Get.to(() => AboutAppScreen());
             },
           ),
+          ListTile(
+            leading: Icon(Icons.account_balance_wallet, color: colorPrimaryDark),
+            title: const Text(
+              'Get Premium',
+              style: TextStyle(color: colorBlack),
+            ),
+            onTap: () {
+              Get.to(() => SubscriptionScreen());
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.share, color: colorPrimaryDark),
+            title: const Text(
+              'Share with friends',
+              style: TextStyle(color: colorBlack),
+            ),
+            onTap: () {
+              _shareApp();
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.question_answer, color: colorPrimaryDark),
+            title: const Text(
+              'Common questions',
+              style: TextStyle(color: colorBlack),
+            ),
+            onTap: () {
+
+              Get.to(() => QuestionScreen());
+            },
+          ),
         ],
       ),
     );
   }
+}
+void _shareApp() {
+  Share.share('Check out this amazing workout app: https://play.google.com/store/apps/details?id=com.fitness.power_pulse');
+
 }

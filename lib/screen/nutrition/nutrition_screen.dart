@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../common/app_colors.dart';
 import '../../network/nutrition_service.dart';
 import '../subscription/subscription_screen.dart';
 
@@ -25,7 +26,7 @@ class _NutritionScreenState extends State<NutritionScreen> {
   void initState() {
     super.initState();
     _search();
-    _checkSubscriptionStatus();
+    //_checkSubscriptionStatus();
   }
   Future<void> _checkSubscriptionStatus() async {
     final prefs = await SharedPreferences.getInstance();
@@ -43,9 +44,10 @@ class _NutritionScreenState extends State<NutritionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: colorBg,
         surfaceTintColor: Colors.transparent,
         title: const Text('Nutrition Information'),
       ),

@@ -3,11 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:kettlebell/screen/home_screens.dart';
 import 'package:kettlebell/screen/nutrition/news_page_screen.dart';
 import 'package:kettlebell/screen/nutrition/nutrition_screen.dart';
-import 'package:kettlebell/screen/splash_screen.dart';
 import 'package:kettlebell/screen/exercisedb/exercise_screen.dart';
+import 'package:kettlebell/screen/subscription/home_screens.dart';
+import 'package:kettlebell/screen/subscription/splash_screen.dart';
+import 'package:kettlebell/utils/app_open_ad_manager.dart';
 import 'common/app_colors.dart';
 import 'common/AppRoutes.dart';
 import 'controller/news_controller.dart';  // Import the NewsController
@@ -17,11 +18,16 @@ void main() async {
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  runApp(const MyApp());
+  final OpenAdManager openAdManager = OpenAdManager();
+  openAdManager.loadAd();
+
+  runApp(MyApp(openAdManager: openAdManager));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final OpenAdManager openAdManager;
+
+  const MyApp({super.key, required this.openAdManager});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +51,7 @@ class MyApp extends StatelessWidget {
             getPages: [
               GetPage(
                 name: AppRoutes.splash,
-                page: () => const SplashScreen(),
+                page: () => SplashScreen(openAdManager: openAdManager),
               ),
               GetPage(
                 name: AppRoutes.home,
@@ -61,7 +67,7 @@ class MyApp extends StatelessWidget {
               ),
               GetPage(
                 name: AppRoutes.premium,
-                page: () => NutritionScreen(),  // Add a new route for the news screen
+                page: () => const NutritionScreen(),  // Add a new route for the news screen
               ),
             ],
           );

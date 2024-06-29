@@ -4,14 +4,18 @@ import 'package:get/get.dart';
 import '../../common/AppRoutes.dart';
 import '../../common/app_colors.dart';
 import '../../common/app_images.dart';
-import '../../common/style.dart'; // Import the file where AppText style is defined
+import '../../common/style.dart';
+import '../../utils/app_open_ad_manager.dart'; // Import the file where AppText style is defined
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key});
+  final OpenAdManager openAdManager;
+  const SplashScreen({Key? key,required this.openAdManager});
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    openAdManager.showAdIfAvailable();
+
     Future.delayed(const Duration(seconds: 3), () {
       Get.offNamed(AppRoutes.home);
     });

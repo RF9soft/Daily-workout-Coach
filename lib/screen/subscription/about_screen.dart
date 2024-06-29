@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../common/style.dart';
+import '../../../common/style.dart';
 
 class AboutAppScreen extends StatelessWidget {
   @override

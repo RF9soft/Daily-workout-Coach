@@ -1,8 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -10,13 +7,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kettlebell/common/app_colors.dart';
 import 'package:kettlebell/common/app_images.dart';
 import 'package:kettlebell/screen/exercisedb/home_exercise_details_screen.dart';
-import 'package:kettlebell/screen/nutrition/nutrition_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../common/AppRoutes.dart';
-import '../common/strings.dart';
-import '../controller/body_part_controller.dart';
-import '../widget/banner_carousel.dart';
-import '../widget/app_drawer.dart';
+import '../../common/strings.dart';
+import '../../controller/body_part_controller.dart';
+import '../../widget/app_drawer.dart';
+import '../../widget/banner_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -102,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.star, color: Colors.yellow),
             onPressed: () {
-              Get.toNamed(AppRoutes.premium);
+              _launchURL(); // Call a function to handle launching the URL
             },
           ),
         ],
@@ -139,39 +135,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               Gap(16.h),
-              GestureDetector(
-                onTap: () {
-                  // Navigate to the desired screen upon tap
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NutritionScreen()),
-                  );
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 80.h,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0.w),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0.r),
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/pattern.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Food Nutrition',
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 1,
-                        fontFamily: 'Roboto',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     // Navigate to the desired screen upon tap
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => NutritionScreen()),
+              //     );
+              //   },
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     height: 80.h,
+              //     margin: EdgeInsets.symmetric(horizontal: 5.0.w),
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(8.0.r),
+              //       image: const DecorationImage(
+              //         image: AssetImage('assets/images/pattern.png'),
+              //         fit: BoxFit.cover,
+              //       ),
+              //     ),
+              //     child: Center(
+              //       child: Text(
+              //         'Food Nutrition',
+              //         style: TextStyle(
+              //           fontSize: 24.sp,
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.white,
+              //           letterSpacing: 1,
+              //           fontFamily: 'Roboto',
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Gap(16.h),
             ],
           ),
@@ -185,6 +181,15 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : null,
     );
+  }
+  // Function to launch the Play Store URL
+  _launchURL() async {
+    const url = 'https://play.google.com/store/apps/details?id=com.fitness.power_pulse';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Widget _buildCard(String title, String imagePath, String bodyPart) {

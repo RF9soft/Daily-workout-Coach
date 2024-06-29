@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:kettlebell/screen/home_screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
+
+import 'home_screens.dart';
 
 
 class SubscriptionScreen extends StatefulWidget {
@@ -49,61 +52,171 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-           Get.back();
+            Get.back();
           },
         ),
-
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child:
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Premium Offer from Us",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+              ),
+              Gap(8.h),
+              Text(
+                "Exclusive events, ad-free experience available through subscription",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16.sp),
+              ),
+              SizedBox(height: 20.h),
+              _products.isEmpty
+                  ? _buildShimmerEffect() // Show shimmer effect while loading products
+                  : _buildPremiumPackages(),
+              SizedBox(height: 20.h),
+              _products.isEmpty
+                  ? const SizedBox()
+                  : ElevatedButton(
+                onPressed: _buy,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0066FF), // Button color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  elevation: 0, // No elevation
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 80.w, vertical: 20.h),
+                  child: Text(
+                    "Subscribe Now",
+                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-            Column(
-              children: [
-                Text(
-                  "Premium Offer from us",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20,color: Colors.blue,fontWeight: FontWeight.w600),
-                ),
-                Gap(8.0),
-                Text(
-                  " Exclusive events, ad-free experience) available through subscription",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
-                ),
-              ],
+  Widget _buildShimmerEffect() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        children: List.generate(3, (index) => _buildShimmerPackageCard()),
+      ),
+    );
+  }
+
+  Widget _buildShimmerPackageCard() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10.h),
+      child: Container(
+        height: 120.h,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 2),
             ),
-          ),
-          _products.isEmpty
-              ? const CircularProgressIndicator() // Show loading indicator if products are not loaded
-              : Image.asset(
-            'assets/images/worka.png', // Replace with your actual asset image path
-            height: 200,
-          ),
-          const SizedBox(height: 20),
-          _products.isEmpty
-              ? const CircularProgressIndicator()
-              : ElevatedButton(
-            onPressed: _buy,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0066FF), // Button color
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8), // 8 dp radius
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 16.h,
+                width: 100.w,
+                color: Colors.grey[300],
               ),
-              elevation: 0, // No elevation
-            ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-              child: Text(
-                "Pay",
-                style: TextStyle(fontSize: 16,color: Colors.white),
+              SizedBox(height: 8.h),
+              Container(
+                height: 12.h,
+                width: 150.w,
+                color: Colors.grey[300],
               ),
-            ),
+              SizedBox(height: 8.h),
+              Container(
+                height: 12.h,
+                width: 120.w,
+                color: Colors.grey[300],
+              ),
+            ],
           ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPremiumPackages() {
+    return Column(
+      children: _products.map((product) => _buildPackageCard(product)).toList(),
+    );
+  }
+
+  Widget _buildPackageCard(ProductDetails product) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10.h),
+      child: Container(
+        height: 120.h,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                product.title,
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8.h),
+              Text(
+                product.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 14.sp),
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${product.price}",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, color: Colors.blue),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16.w,
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -137,7 +250,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         );
         final prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isSubscribed', true);
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
