@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class NewsService {
-  static const String apiKey = '2e1da9e6071938978da28da2dea63acadd61669d';
+  static const String apiKey = '55a1ee85939150c20bef947efebb82d488d7e1f4';
   static const String baseUrl = 'https://google.serper.dev/news';
 
   Future<List<dynamic>> fetchNews(String query, int page) async {

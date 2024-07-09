@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class PlacesService {
   static const String apiUrl = 'https://google.serper.dev/places';
   static const Map<String, String> headers = {
-    'X-API-KEY': '2e1da9e6071938978da28da2dea63acadd61669d',
+    'X-API-KEY': '55a1ee85939150c20bef947efebb82d488d7e1f4',
     'Content-Type': 'application/json'
   };
 

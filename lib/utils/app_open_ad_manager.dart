@@ -6,7 +6,7 @@ class OpenAdManager {
 
   void loadAd() {
     AppOpenAd.load(
-      adUnitId: '<YOUR_AD_UNIT_ID>',
+      adUnitId: 'ca-app-pub-3254074284549678/3751659006',
       request: AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: (ad) {
